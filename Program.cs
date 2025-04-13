@@ -14,11 +14,29 @@ namespace WebCrawler
 			var web = new HtmlWeb();
 			var document = web.Load(origin);
 
-			var links = document.DocumentNode.SelectNodes("//a[@href]");
-			foreach (var link in links)
+			var urlQueue = new Queue<string>();
+			var visitedUrls = new HashSet<string>();
+
+			urlQueue.Enqueue(origin);
+
+			while (urlQueue.Count > 0)
 			{
-				var url = link.GetAttributeValue("href", string.Empty);
-				Console.WriteLine($"Found URL: {url}");
+				var currentUrl = urlQueue.Dequeue();
+				if (visitedUrls.Contains(currentUrl)) continue;
+
+				visitedUrls.Add(currentUrl);
+				Console.WriteLine($"Crawling \'{currentUrl}\'...");
+
+				var currentDocument = web.Load(currentUrl);
+				var links = currentDocument.DocumentNode.SelectNodes("//a[@href]");
+				if (links is null) continue;
+
+				foreach (var link in links)
+				{
+					var url = link.GetAttributeValue("href", string.Empty);
+					if (visitedUrls.Contains(url)) continue;
+					urlQueue.Enqueue(url);
+				}
 			}
 		}
 	}
