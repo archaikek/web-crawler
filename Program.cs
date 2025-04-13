@@ -8,12 +8,18 @@ namespace WebCrawler
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Please provide a starting URL.");
-			var origin = Console.ReadLine();
+			var origin = "https://example.com";
+			//var origin = Console.ReadLine();
 
 			var web = new HtmlWeb();
 			var document = web.Load(origin);
-			
-			Console.WriteLine("Page loaded successfully");
+
+			var links = document.DocumentNode.SelectNodes("//a[@href]");
+			foreach (var link in links)
+			{
+				var url = link.GetAttributeValue("href", string.Empty);
+				Console.WriteLine($"Found URL: {url}");
+			}
 		}
 	}
 }
