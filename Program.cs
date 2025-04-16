@@ -9,6 +9,8 @@ namespace web_crawler
 {
 	internal class Program
 	{
+		public static string pagesPath = "../../../pages/";
+		public static string graphFilename = "graph.in";
 		static void Main(string[] args)
 		{
 			int threadCount = Int32.Parse(args[0]);
@@ -46,7 +48,13 @@ namespace web_crawler
 			crawlers[0].CrawlLoop();
 			Task.WaitAll(tasks);
 
-			Console.WriteLine(Crawler.graph);
+			//Console.WriteLine(Crawler.graph);
+
+			if (!Directory.Exists(pagesPath))
+			{
+				Directory.CreateDirectory(pagesPath);
+			}
+			File.WriteAllText(pagesPath + graphFilename, $"{Crawler.graph.Nodes.Count}\n" + Crawler.graph.ToString());
 		}
 	}
 }

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using HtmlAgilityPack;
 using TurnerSoftware.RobotsExclusionTools;
+using System.Security;
 
 namespace web_crawler
 {
 	internal class Crawler
 	{
 		private static LockedInt foundCount = new LockedInt(1);
-		public static readonly int limit = 34;
+		public static readonly int limit = 444;
 
 		public static Graph graph { get; set; } = null;
 		public static ConcurrentQueue<KeyValuePair<string, int>> urlQueue { get; } = new ConcurrentQueue<KeyValuePair<string, int>>();
@@ -43,7 +44,6 @@ namespace web_crawler
 			if (!urlQueue.TryDequeue(out currentUrl)) return;
 
 			//if (foundUrls.ContainsKey(currentUrl.Key)) return;
-
 			var foundUrls = graph.Nodes;
 
 			foundUrls.GetOrAdd(currentUrl.Key, currentUrl.Value);
@@ -51,11 +51,21 @@ namespace web_crawler
 
 			var currentDocument = web.TryLoad(currentUrl.Key);
 			var links = currentDocument.DocumentNode.SelectNodes("//a[@href]");
+
+			Task saver = Task.Run(() => {
+				using (FileStream fs = File.OpenWrite(MakeFileName(currentUrl.Value, currentUrl.Key)))
+				{
+					currentDocument.Save(fs);
+				}
+			});
+
 			if (links is null) return;
 
 			foreach (var link in links)
 			{
 				var url = link.GetAttributeValue("href", String.Empty);
+				int index = url.IndexOf('?');
+				if (index != -1) url = url.Substring(0, url.IndexOf('?'));
 				if (!url.StartsWith(origin)) continue;
 				if (!robotsFile.IsAllowedAccess(new Uri(url), "TestCrawer2221")) continue;
 
@@ -77,6 +87,13 @@ namespace web_crawler
 					urlQueue.Enqueue(newUrl);
 				}
 			}
+
+			saver.Wait();
+		}
+
+		private string MakeFileName(int index, string currentUrl)
+		{
+			return Program.pagesPath + $"{index}_{currentUrl.Replace(':', '-').Replace('/', '_').Replace('\\', '_')}.html";
 		}
 
 		internal class LockedInt

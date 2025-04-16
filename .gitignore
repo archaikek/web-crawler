@@ -39,3 +39,6 @@ bin/*
 # VS project files
 *.vcx*
 x64/*
+
+# Resources
+pages/*
