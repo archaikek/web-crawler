@@ -2,7 +2,7 @@
   "profiles": {
     "web-crawler": {
       "commandName": "Project",
-      "commandLineArgs": "12"
+      "commandLineArgs": "24"
     }
   }
 }
