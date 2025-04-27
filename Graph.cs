@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Concurrent;
+using HtmlAgilityPack;
+using System.Security.Cryptography.X509Certificates;
 
 namespace web_crawler
 {
@@ -58,8 +60,8 @@ namespace web_crawler
 			string result = "";
 			for (int i = 0; i < edges.Length; ++i)
 			{
-				result += $"{i}\n";
 				var neighbours = Edges[i];
+				result += $"{i} {neighbours.Count()}\n";
 				foreach (var neighbour in neighbours)
 				{
 					result += $"{neighbour} ";
@@ -70,8 +72,11 @@ namespace web_crawler
 		}
 		private string NodesToString()
 		{
+			var NodeList = Nodes.ToList();
+			NodeList.Sort((a, b) => { return a.Value == b.Value ? 0 : a.Value < b.Value ? -1 : 1; });
+
 			string result = "";
-			foreach (var node in Nodes)
+			foreach (var node in NodeList)
 			{
 				result += $"{node.Value} {node.Key}\n";
 			}

@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "web-crawler.csproj",
+        "Action": "Start",
+        "DebugTarget": "web-crawler"
+      },
+      {
+        "Path": "graph-analyzer\\graph-analyzer.vcxproj",
+        "Action": "Start",
+        "DebugTarget": "Local Windows Debugger"
+      }
+    ]
+  }
+]

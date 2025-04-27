@@ -1,0 +1,10 @@
+﻿  main.cpp
+  graph_analysis_functions.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\graph_analysis_functions.h(16,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\graph_analysis_functions.h(16,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/graph_analysis_functions.cpp')
+  
+  Generating Code...
+  graph-analyzer.vcxproj -> C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\x64\Debug\graph-analyzer.exe
