@@ -1,5 +1,8 @@
 #pragma once
 #include "stl_helper_functions.h"
+#include <cmath>
+#include <queue>
+#include <algorithm>
 
 inline int get_node_count(const graph_t *graph)
 {
@@ -23,3 +26,10 @@ graph_t *create_scc(const graph_t *graph, std::vector<int> **out__scc_members);
 std::vector<int> *get_out_components(const graph_t *graph);
 std::vector<int> *get_in_components(const graph_t *graph);
 
+std::vector<int> *get_degrees(const graph_t *graph);
+
+
+int **shortest_paths(const graph_t *graph, double *out__avg_dist_global, int *out__diam, int **out__eccentricity, double **out__avg_dist);
+
+int **create_squared(const graph_t *graph);
+double *get_clustering_factors(const graph_t *graph, double *out__global_cluster);

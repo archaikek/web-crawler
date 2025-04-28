@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include "headers/graph_analysis_functions.h"
 #include <cstdio>
 
@@ -69,18 +69,62 @@ int main()
 
 	//print_graph(scc);
 
+	delete in;
+	delete out;
+	delete[] scc_members;
+
 	// degrees distribution
 	printf("\n\n3.3\n");
 	graph_t *transposed = create_transposed(graph);
 
+	std::vector<int> *out_dist = get_degrees(graph);
+	printf("OUT degrees:\n");
+	for (int i = 0; i < node_count; ++i)
+	{
+		if (out_dist[i].size() > 0) printf("%d nodes have OUT degree %d\n", out_dist[i].size(), i);
+	}
+	std::vector<int> *in_dist = get_degrees(transposed);
+	printf("IN degrees:\n");
+	for (int i = 0; i < node_count; ++i)
+	{
+		if (in_dist[i].size() > 0) printf("%d nodes have IN degree %d\n", in_dist[i].size(), i);
+	}
 
+	// TODO: wyznaczenie współczynników funkcji potęgowej
+
+	//delete[] in_dist;
+	//delete[] out_dist;
+	//delete_graph(transposed);
+	//// shortest paths
+	//printf("\n\n3.4\n");
+	//double avg_dist_global = 0;
+	//int diam = 0;
+	//int *eccentricity = NULL;
+	//double *avg_dist = NULL;
+	//int **results = shortest_paths(graph, &avg_dist_global, &diam, &eccentricity, &avg_dist);
+	//printf("Average distance: %.4lf\n", avg_dist_global);
+	//printf("Diameter: %d\n", diam);
+	//// TODO: wyznaczenie histogramów ekscentryczności i średnich odległości
+
+	//for (int i = 0; i < node_count; ++i) free(results[i]);
+	//free(results);
+	//free(avg_dist);
+	//free(eccentricity);
+
+	// clustering factors
+	printf("\n\n3.5\n");
+	double global_clustering_factor = 0;
+	double *clustering_factors = get_clustering_factors(graph, &global_clustering_factor);
+	printf("Global clustering factor: %.4lf\n", global_clustering_factor);
+	printf("Local clustering factors:\n");
+	for (int i = 0; i < node_count; ++i)
+	{
+		printf("%d: %.4lf clustered\n", i, clustering_factors[i]);
+	}
+
+	free(clustering_factors);
 
 	/* cleanup */
-	delete_graph(transposed);
-	delete in;
-	delete out;
-	delete[] scc_members;
 	delete_graph(graph);
-
 	return 0;
 }
