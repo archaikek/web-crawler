@@ -8,9 +8,17 @@ int main()
 	FILE *input = fopen(input_path, "r");
 	if (input == NULL)
 	{
-		printf("Couldn't find input file!\n");
+		printf("Couldn't open input file!\n");
 		return -1;
 	}
+	FILE *results_file = fopen(output_path, "w");
+	if (input == NULL)
+	{
+		printf("Couldn't open output file!\n");
+		return -1;
+	}
+	pass_results_file(results_file);
+
 	
 	int node_count;
 	fscanf(input, "%d", &node_count);
@@ -31,100 +39,27 @@ int main()
 
 	/* Run graph analysis functions */
 	// node and edge counts
-	printf("\n\n3.1\n");
-	printf("Node count: %d\n", get_node_count(graph));
-	printf("Edge count: %d\n", get_edge_count(graph));
+	fprintf(results_file, "\n\n3.1\n");
+	fprintf(results_file, "Node count: %d\n", get_node_count(graph));
+	fprintf(results_file, "Edge count: %d\n", get_edge_count(graph));
 
 	// connected components analysis
-	printf("\n\n3.2\n");
-	std::vector<int> *scc_members = NULL;
-	graph_t *scc = create_scc(graph, &scc_members);
-
-	printf("WCC count: 1 (by definition)\n");
-	printf("SCC count: %d\n", get_node_count(scc));
-	printf("SCCs by nodes:\n");
-	for (int i = 0; i < scc->node_count; ++i)
-	{
-		printf("%d <-", i);
-		for (int j = 0; j < scc_members[i].size(); ++j)
-		{
-			printf(" %d", scc_members[i][j]);
-		}
-		printf("\n(%d total)\n", scc_members[i].size());
-	}
-
-	std::vector<int> *in = get_in_components(scc), *out = get_out_components(scc);
-	printf("IN components: \n");
-	for (int i = 0; i < in->size(); ++i)
-	{
-		printf("%d ", (*in)[i]);
-	}
-	printf("\n(%d total)\n", in->size());
-	printf("OUT components: \n");
-	for (int i = 0; i < out->size(); ++i)
-	{
-		printf("%d ", (*out)[i]);
-	}
-	printf("\n(%d total)\n", out->size());
-
-	//print_graph(scc);
-
-	delete in;
-	delete out;
-	delete[] scc_members;
+	run_3_2(graph);
 
 	// degrees distribution
-	printf("\n\n3.3\n");
-	graph_t *transposed = create_transposed(graph);
+	run_3_3(graph);
 
-	std::vector<int> *out_dist = get_degrees(graph);
-	printf("OUT degrees:\n");
-	for (int i = 0; i < node_count; ++i)
-	{
-		if (out_dist[i].size() > 0) printf("%d nodes have OUT degree %d\n", out_dist[i].size(), i);
-	}
-	std::vector<int> *in_dist = get_degrees(transposed);
-	printf("IN degrees:\n");
-	for (int i = 0; i < node_count; ++i)
-	{
-		if (in_dist[i].size() > 0) printf("%d nodes have IN degree %d\n", in_dist[i].size(), i);
-	}
-
-	// TODO: wyznaczenie współczynników funkcji potęgowej
-
-	//delete[] in_dist;
-	//delete[] out_dist;
-	//delete_graph(transposed);
-	//// shortest paths
-	//printf("\n\n3.4\n");
-	//double avg_dist_global = 0;
-	//int diam = 0;
-	//int *eccentricity = NULL;
-	//double *avg_dist = NULL;
-	//int **results = shortest_paths(graph, &avg_dist_global, &diam, &eccentricity, &avg_dist);
-	//printf("Average distance: %.4lf\n", avg_dist_global);
-	//printf("Diameter: %d\n", diam);
-	//// TODO: wyznaczenie histogramów ekscentryczności i średnich odległości
-
-	//for (int i = 0; i < node_count; ++i) free(results[i]);
-	//free(results);
-	//free(avg_dist);
-	//free(eccentricity);
+	// shortest paths
+	run_3_4(graph);
 
 	// clustering factors
-	printf("\n\n3.5\n");
-	double global_clustering_factor = 0;
-	double *clustering_factors = get_clustering_factors(graph, &global_clustering_factor);
-	printf("Global clustering factor: %.4lf\n", global_clustering_factor);
-	printf("Local clustering factors:\n");
-	for (int i = 0; i < node_count; ++i)
-	{
-		printf("%d: %.4lf clustered\n", i, clustering_factors[i]);
-	}
+	run_3_5(graph);
 
-	free(clustering_factors);
+	// resistance tests
+	run_3_6(graph);
 
 	/* cleanup */
 	delete_graph(graph);
+	fclose(results_file);
 	return 0;
 }

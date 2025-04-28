@@ -1,19 +1,52 @@
-﻿  graph_analysis_functions.cpp
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\graph_analysis_functions.h(19,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+﻿  main.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\graph_analysis_functions.h(23,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+  graph_analysis_functions.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\graph_analysis_functions.h(23,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'sources/graph_analysis_functions.cpp')
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(56,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(56,24): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(67,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(67,24): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(113,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(113,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(186,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(186,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(248,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(248,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(252,55): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(252,32): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(273,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(273,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(62,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(62,24): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(73,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(73,24): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(118,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(118,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(167,25): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(167,25):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(176,24): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(176,24):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(182,24): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(182,24):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(213,53): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(213,53):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(219,52): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(219,52):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(256,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(256,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(336,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(336,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(340,55): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(340,32): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(361,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(361,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(415,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(415,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(438,25): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(438,25):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(450,49): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp(450,30): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  Generating Code...
   graph-analyzer.vcxproj -> C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\x64\Debug\graph-analyzer.exe

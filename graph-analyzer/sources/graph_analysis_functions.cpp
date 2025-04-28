@@ -1,9 +1,15 @@
-#include "../headers/graph_analysis_functions.h"
+﻿#include "../headers/graph_analysis_functions.h"
 
 static int *rep, *union_size; // find and union
 static int *post_order, curr_order; // SCC finding
 int *visited, run_count; // DFS
 static int *scc_index, curr_scc; // SCC creation
+
+static FILE *results_file;
+void pass_results_file(FILE *results)
+{
+	results_file = results;
+}
 
 static void init_scc_vars(const int node_count)
 {
@@ -78,7 +84,6 @@ static void scc_dfs_backward(const graph_t *graph, const int x)
 graph_t *create_scc(const graph_t *graph, std::vector<int> **out__scc_members)
 {
 	helper const int node_count = graph->node_count;
-	init_scc_vars(node_count);
 
 	++run_count;
 	for (int i = 0; i < node_count; ++i) // traverse the graph forward to calculate post orders for its nodes
@@ -121,7 +126,6 @@ graph_t *create_scc(const graph_t *graph, std::vector<int> **out__scc_members)
 	}
 	for (int i = 0; i < curr_scc; ++i) force_unique(out + i);
 
-	clear_scc_vars();
 	return scc_graph;
 }
 
@@ -143,6 +147,47 @@ std::vector<int> *get_in_components(const graph_t *graph)
 	free(transposed);
 	return result;
 }
+void run_3_2(graph_t *graph)
+{
+	fprintf(results_file, "\n\n3.2\n");
+	init_scc_vars(graph->node_count);
+	std::vector<int> *scc_members = NULL;
+	graph_t *scc = create_scc(graph, &scc_members);
+
+	fprintf(results_file, "WCC count: 1 (by definition)\n");
+	fprintf(results_file, "SCC count: %d\n", get_node_count(scc));
+	fprintf(results_file, "SCCs by nodes:\n");
+	for (int i = 0; i < scc->node_count; ++i)
+	{
+		fprintf(results_file, "%d <-", i);
+		for (int j = 0; j < scc_members[i].size(); ++j)
+		{
+			fprintf(results_file, " %d", scc_members[i][j]);
+		}
+		fprintf(results_file, "\n(%d total)\n", scc_members[i].size());
+	}
+
+	std::vector<int> *in = get_in_components(scc), *out = get_out_components(scc);
+	fprintf(results_file, "IN components: \n");
+	for (int i = 0; i < in->size(); ++i)
+	{
+		fprintf(results_file, "%d ", (*in)[i]);
+	}
+	fprintf(results_file, "\n(%d total)\n", in->size());
+	fprintf(results_file, "OUT components: \n");
+	for (int i = 0; i < out->size(); ++i)
+	{
+		fprintf(results_file, "%d ", (*out)[i]);
+	}
+	fprintf(results_file, "\n(%d total)\n", out->size());
+
+	//print_graph(scc);
+
+	delete in;
+	delete out;
+	delete[] scc_members;
+	clear_scc_vars();
+}
 
 
 std::vector<int> *get_degrees(const graph_t *graph)
@@ -154,6 +199,31 @@ std::vector<int> *get_degrees(const graph_t *graph)
 	for (int i = 0; i < node_count; ++i) result[edges[i].size()].emplace_back(i);
 
 	return result;
+}
+void run_3_3(graph_t *graph)
+{
+	helper const int node_count = graph->node_count;
+	fprintf(results_file, "\n\n3.3\n");
+	graph_t *transposed = create_transposed(graph);
+
+	std::vector<int> *out_dist = get_degrees(graph);
+	fprintf(results_file, "OUT degrees:\n");
+	for (int i = 0; i < node_count; ++i)
+	{
+		if (out_dist[i].size() > 0) fprintf(results_file, "%d nodes have OUT degree %d\n", out_dist[i].size(), i);
+	}
+	std::vector<int> *in_dist = get_degrees(transposed);
+	fprintf(results_file, "IN degrees:\n");
+	for (int i = 0; i < node_count; ++i)
+	{
+		if (in_dist[i].size() > 0) fprintf(results_file, "%d nodes have IN degree %d\n", in_dist[i].size(), i);
+	}
+
+	// TODO: wyznaczenie współczynników funkcji potęgowej
+
+	delete[] in_dist;
+	delete[] out_dist;
+	delete_graph(transposed);
 }
 
 
@@ -209,7 +279,6 @@ int **shortest_paths(const graph_t *graph, double *out__avg_dist_global, int *ou
 	*out__eccentricity = (int *)calloc(node_count, sizeof(int));
 	*out__avg_dist = (double *)calloc(node_count, sizeof(double));
 
-	init_search_vars(node_count);
 	int **results = (int **)malloc(node_count * sizeof(int *));
 	int denominator, denominator_global = 0;
 	for (int i = 0; i < node_count; ++i)
@@ -231,10 +300,29 @@ int **shortest_paths(const graph_t *graph, double *out__avg_dist_global, int *ou
 	}
 	*out__avg_dist_global /= denominator_global;
 
-	clear_search_vars();
 	return results;
 }
+void run_3_4(graph_t *graph)
+{
+	helper const int node_count = graph->node_count;
+	init_search_vars(node_count);
 
+	fprintf(results_file, "\n\n3.4\n");
+	double avg_dist_global = 0;
+	int diam = 0;
+	int *eccentricity = NULL;
+	double *avg_dist = NULL;
+	int **results = shortest_paths(graph, &avg_dist_global, &diam, &eccentricity, &avg_dist);
+	fprintf(results_file, "Average distance: %.4lf\n", avg_dist_global);
+	fprintf(results_file, "Diameter: %d\n", diam);
+	// TODO: wyznaczenie histogramów ekscentryczności i średnich odległości
+
+	for (int i = 0; i < node_count; ++i) free(results[i]);
+	free(results);
+	free(avg_dist);
+	free(eccentricity);
+	clear_search_vars();
+}
 
 int **create_squared(const graph_t *graph)
 {
@@ -283,4 +371,91 @@ double *get_clustering_factors(const graph_t *graph, double *out__global_cluster
 	free(squared);
 
 	return clustering_factors;
+}
+void run_3_5(graph_t *graph)
+{
+	helper const int node_count = graph->node_count;
+	fprintf(results_file, "\n\n3.5\n");
+	double global_clustering_factor = 0;
+	double *clustering_factors = get_clustering_factors(graph, &global_clustering_factor);
+	fprintf(results_file, "Global clustering factor: %.4lf\n", global_clustering_factor);
+	fprintf(results_file, "Local clustering factors:\n");
+	for (int i = 0; i < node_count; ++i)
+	{
+		fprintf(results_file, "%d: %.4lf clustered\n", i, clustering_factors[i]);
+	}
+
+	free(clustering_factors);
+}
+
+static std::set<int> *get_random_numbers(const int num_count, const int max_num)
+{
+	std::set<int> *result = new std::set<int>();
+	while (result->size() < num_count)
+	{
+		result->insert(std::rand() % max_num);
+	}
+
+	return result;
+}
+static inline bool is_in_set(const int x, const std::set<int> *set)
+{
+	return set->lower_bound(x) == set->end() || x == *(set->lower_bound(x));
+}
+static graph_t *copy_graph_with_disabled_nodes(const graph_t *graph, const std::set<int> *disabled_nodes)
+{
+	helper const int node_count = graph->node_count;
+	helper const std::vector<int> *edges = graph->edges;
+	graph_t *copy = create_graph(node_count);
+	helper std::vector<int> *edges_copy = copy->edges;
+
+	for (int i = 0; i < node_count; ++i)
+	{
+		if (is_in_set(i, disabled_nodes)) continue;
+		helper const int size = edges[i].size();
+		for (int j = 0; j < size; ++j)
+		{
+			if (is_in_set(edges[i][j], disabled_nodes)) continue;
+			edges_copy[i].emplace_back(edges[i][j]);
+		}
+	}
+
+	return copy;
+}
+static void test_malfunction(const graph_t *graph, const double mal_size)
+{
+	helper const int node_count = graph->node_count;
+	helper const int disabled_node_count = int(round(double(node_count) * double(mal_size) * 0.01));
+	std::set<int> *disabled_nodes = get_random_numbers(disabled_node_count, node_count);
+
+	graph_t *copy = copy_graph_with_disabled_nodes(graph, disabled_nodes);
+	fprintf(results_file, "\n*** RANDOM MALFUNCTION WITH %d NODES DOWN ***\n", disabled_node_count);
+	fprintf(results_file, "Disabled nodes: ");
+	helper std::set<int>::iterator end = disabled_nodes->end();
+	helper std::vector<int> *edges = graph->edges;
+	for (std::set<int>::iterator it = disabled_nodes->begin(); it != end; ++it)
+	{
+		fprintf(results_file, "%d (out_deg=%d)  ", *it, edges[*it].size());
+	}
+
+	run_3_2(copy);
+	run_3_3(copy);
+	run_3_4(copy);
+
+	delete_graph(copy);
+}
+void run_resistance_tests(const graph_t *graph, std::vector<double> *percentages)
+{
+	srand(2221);
+	helper const int test_count = percentages->size();
+	for (int i = 0; i < test_count; ++i)
+	{
+		test_malfunction(graph, (*percentages)[i]);
+	}
+}
+void run_3_6(graph_t *graph)
+{
+	std::vector<double> *percentages = new std::vector<double>({ 0.1, 0.25, 0.5, 1, 2.5, 5, 10 });
+	run_resistance_tests(graph, percentages);
+	delete percentages;
 }
