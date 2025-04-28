@@ -1,5 +1,5 @@
 #pragma once
-#include "structs.h"
+#include "stl_helper_functions.h"
 
 inline int get_node_count(const graph_t *graph)
 {
@@ -18,4 +18,8 @@ inline int get_edge_count(const graph_t *graph)
 
 	return result;
 }
+
+graph_t *create_scc(const graph_t *graph, std::vector<int> **out__scc_members);
+std::vector<int> *get_out_components(const graph_t *graph);
+std::vector<int> *get_in_components(const graph_t *graph);
 

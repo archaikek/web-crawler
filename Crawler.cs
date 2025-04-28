@@ -92,18 +92,15 @@ namespace web_crawler
 				//if (foundCount.value >= limit) break;
 
 				var url = link.GetAttributeValue("href", String.Empty);
-				if (url.StartsWith('/')) url = origin + url.Substring(1);
-				// if the page does not belong to the origin domain
-				if (!url.StartsWith(origin)) continue;
-				// if the page is a html (this will obviously fail if a location without an extension leads to anything other than an html, hopefully it's not an issue)
-				//if (Regex.Matches(url.Substring(url.Length - 5), ".").Count >= 1 && !url.EndsWith(".html")) continue;
+				// always add origin to the beginning - if it was an outside domain, it will create an invalid link anyway
+				if (!url.StartsWith(origin)) url = origin + (url.StartsWith('/') ? url.Substring(1) : url);
 
 				int index = url.IndexOf('?');
 				if (index != -1) url = url.Substring(0, index);
 				index = url.IndexOf('#');
 				if (index != -1) url = url.Substring(0, index);
 
-				url = CheckFinalDestination(url);
+				url = CheckFinalDestination(url, origin);
 				if (url is null) continue;
 
 				index = url.IndexOf('?'); // do this again for good measure
@@ -142,32 +139,36 @@ namespace web_crawler
 			Console.WriteLine($"Finished crawling page {currentUrl.Value}");
 		}
 
-		private string MakeFileName(int index, string currentUrl)
+		public static string MakeFileName(int index, string currentUrl)
 		{
 			string suffix = currentUrl.EndsWith(".html") ? "" : ".html"; // add .html to documents that don't have it
-			return Program.pagesPath + $"{index}_{currentUrl.Replace(':', '-').Replace('/', '_').Replace('\\', '_')}{suffix}";
+			foreach (char c in System.IO.Path.GetInvalidFileNameChars())currentUrl = currentUrl.Replace(c, '_');
+			return Program.pagesPath + $"{index}_{currentUrl}{suffix}";
 		}
-		private string CheckFinalDestination(string url)
+		public static string CheckFinalDestination(string url, string origin)
 		{
 			if (destinationCache.ContainsKey(url)) return destinationCache[url];
 
-			WebRequest request = WebRequest.Create(url);
-			WebResponse response;
+			HttpClient client = new HttpClient();
+			client.BaseAddress = new Uri(url);
+			client.Timeout = new TimeSpan(0, 0, 20);
+			HttpResponseMessage response;
 			try
 			{
-				response = request.GetResponse();
+				response = client.GetAsync(client.BaseAddress).Result;
 			}
-			catch (WebException ex)
+			catch (Exception ex)
 			{
-				destinationCache[url] = null;
-				return null;
+				return destinationCache[url] = null;
 			}
+
 			destinationCache[url] = null;
 			if (response is null) return null;
-			if (!response.ResponseUri.ToString().StartsWith(origin)) return null;
-			if (response.ContentType != "text/html") return null;
+			if (response.StatusCode != HttpStatusCode.OK) return null;
+			if (!response.RequestMessage.RequestUri.ToString().StartsWith(origin)) return null;
+			if (response.Content.Headers.ContentType.MediaType != "text/html") return null;
 
-			return destinationCache[url] = response.ResponseUri.ToString();
+			return destinationCache[url] = response.RequestMessage.RequestUri.ToString();
 		}
 
 		internal class LockedInt

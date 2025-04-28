@@ -1,10 +1,17 @@
 ﻿  main.cpp
-  graph_analysis_functions.cpp
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\graph_analysis_functions.h(16,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\graph_analysis_functions.h(16,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'sources/graph_analysis_functions.cpp')
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(53,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(53,10):
+      consider using '%zd' in the format string
   
-  Generating Code...
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(62,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(62,9):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(68,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(68,9):
+      consider using '%zd' in the format string
+  
   graph-analyzer.vcxproj -> C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\x64\Debug\graph-analyzer.exe

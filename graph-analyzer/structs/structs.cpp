@@ -14,3 +14,20 @@ void delete_graph(graph_t *graph)
 	delete[] graph->edges;
 	free(graph);
 }
+
+void print_graph(const graph_t *graph)
+{
+	helper const int node_count = graph->node_count;
+	helper const std::vector<int> *edges = graph->edges;
+	printf("Node count: %d\nEdges:\n", node_count);
+	for (int i = 0; i < node_count; ++i)
+	{
+		helper const int size = edges[i].size();
+		printf("%d ->", i);
+		for (int j = 0; j < size; ++j)
+		{
+			printf(" %d", edges[i][j]);
+		}
+		printf("\n\n");
+	}
+}

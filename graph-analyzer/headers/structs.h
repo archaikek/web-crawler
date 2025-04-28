@@ -15,3 +15,5 @@ inline void add_edge(graph_t *graph, const int src, const int dst)
 {
 	graph->edges[src].emplace_back(dst);
 }
+
+void print_graph(const graph_t *graph);

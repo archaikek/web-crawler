@@ -45,9 +45,10 @@ namespace web_crawler
 			Crawler[] crawlers = new Crawler[threadCount];
 			crawlers[0] = new Crawler(origin, robotsFile);
 
-			var document = crawlers[0].Web.TryLoad(origin);
+			string originTarget = (Crawler.CheckFinalDestination(origin, origin));
+			var document = crawlers[0].Web.TryLoad(originTarget);
 
-			Crawler.urlQueue.Enqueue(new KeyValuePair<string, int>(origin, 0));
+			Crawler.urlQueue.Enqueue(new KeyValuePair<string, int>(originTarget, 0));
 
 			// run this a few times so that there are actual links in the queue
 
