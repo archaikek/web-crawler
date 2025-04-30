@@ -1,0 +1,17 @@
+#pragma once
+
+#include "structs.h"
+#include "stl_helper_functions.h"
+
+typedef struct
+{
+	int global_avg, diameter;
+	vect *eccentricities;
+	std::vector<double> *avg;
+} graph_metrics_t;
+
+void delete_metrics(graph_metrics_t *metrics);
+
+graph_metrics_t *find_metrics(const graph_t *graph);
+
+void plot_metrics(const graph_metrics_t *metrics, const double group_size);

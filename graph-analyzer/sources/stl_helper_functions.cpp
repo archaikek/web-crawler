@@ -3,17 +3,23 @@
 template <typename T> 
 static void remove_duplicates(std::vector<T> *v)
 {
-	std::unordered_set<T> *temp = new std::unordered_set<T>();
-
-	helper const int size = v->size();
-	for (int i = 0; i < size; ++i) temp->insert((*v)[i]);
+	std::unordered_set<T> *temp = new std::unordered_set<T>(v->begin(), v->end());
 	v->clear();
+	v->insert(v->begin(), temp->begin(), temp->end());
+	delete temp;
+}
 
-	helper const std::unordered_set<int>::iterator end = temp->end();
-	for (std::unordered_set<int>::iterator it = temp->begin(); it != end; ++it)
+std::vector<double> *make_line(const std::vector<double> *X, const std::pair<double, double> coeff, 
+	double (*calc_fun)(const std::pair<double, double>, const double))
+{
+	helper const int size = X->size();
+	helper const double *data = &((*X)[0]);
+	std::vector<double> *line = new std::vector<double>(size);
+	helper double *line_vals = &((*line)[0]);
+	for (int i = 0; i < size; ++i)
 	{
-		v->emplace_back(*it);
+		line_vals[i] = calc_fun(coeff, data[i]);
 	}
 
-	delete temp;
+	return line;
 }

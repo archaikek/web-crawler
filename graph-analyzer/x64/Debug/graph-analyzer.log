@@ -1,18 +1,18 @@
 ﻿  main.cpp
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(41,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(41,9):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(43,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(43,9):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(45,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(45,10):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(47,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(47,10):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(53,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(53,9):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(55,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(55,9):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(58,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(58,11):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(60,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(60,11):
       consider using '%zd' in the format string
   
   graph-analyzer.vcxproj -> C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\x64\Debug\graph-analyzer.exe

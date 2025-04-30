@@ -1,6 +1,3 @@
-# Prerequisites
-*.d
-
 # Compiled Object files
 *.slo
 *.lo
@@ -18,7 +15,6 @@
 
 # Fortran module files
 *.mod
-*.smod
 
 # Compiled Static libraries
 *.lai
@@ -30,20 +26,13 @@
 *.exe
 *.out
 *.app
-*/obj/*
-*/bin/*
-obj/*
-bin/*
-.vs*
 
-# VS project files
-*.vcx*
-x64/*
-graph-analyzer/x64/*
+# Logfiles
+*.tlog
+*.log
 
-# Resources
-pages/*
-figures/*
-graph.in
-cache.txt
-times.txt
+# Build
+/examples/build/*
+
+# vim temp files
+*.sw*
