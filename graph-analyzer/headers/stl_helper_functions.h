@@ -1,7 +1,6 @@
 #pragma once
-#include "structs.h"
-#include <set>
 
-graph_t *create_transposed(const graph_t *graph);
+#include "defines.h"
 
-void force_unique(std::vector<int> *v);
+template <typename T>
+static void remove_duplicates(std::vector<T> *v);
