@@ -123,11 +123,38 @@ void plot_metrics(const graph_metrics_t *metrics, const double group_size)
 
 	char title[80];
 	plt::figure_size(800, 600);
-	plt::plot(axes.first, axes.second, "r.");
-	plt::plot(axes.first, *line, "y-");
+	plt::plot(axes.first, axes.second, "r-");
+	plt::plot(axes.first, *line, "y--");
 	plt::xlabel("Average distance");
 	plt::ylabel("Number of nodes with given distance");
-	sprintf(title, "Distribution of average distances in graph (grouped by %d)", group_size);
+	sprintf(title, "Distribution of average distances in graph (grouped by %.2lf)", group_size);
+	plt::title(title);
+	plt::save(filename);
+	plt::close();
+}
+void plot_eccenticities(const graph_metrics_t *metrics)
+{
+	helper std::vector<int> *eccentricities = metrics->eccentricities;
+	std::pair<std::vector<double>, std::vector<int>> axes = make_histogram(eccentricities, 1);
+	//std::pair<double, double> coeff = regress_linear(&(axes.first), &(axes.second));
+	//std::vector<double> *line = make_line(&(axes.first), coeff, calculate_linear_fun);
+
+	char filename[250] = "";
+	sprintf(filename, "%s%s.png", figures_path, "fig3_4_hist-ECC");
+
+	char title[80];
+	plt::figure_size(800, 600);
+	plt::plot(axes.first, axes.second, "bo");
+	for (int i = 0; i < axes.first.size(); ++i)
+	{
+		char annotation[20];
+		sprintf(annotation, "%d", axes.second[i]);
+		plt::annotate(annotation, axes.first[i] - 0.1, axes.second[i] + 40);
+	}
+	//plt::plot(axes.first, *line, "y-");
+	plt::xlabel("Eccentricity");
+	plt::ylabel("Number of nodes with given eccentricity");
+	sprintf(title, "Distribution of eccentricities in graph");
 	plt::title(title);
 	plt::save(filename);
 	plt::close();

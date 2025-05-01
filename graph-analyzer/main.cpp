@@ -81,21 +81,9 @@ int main()
 
 	printf("Degrees:\n");
 	int group_sizes[] = { 1, 4, 10, 25 };
-	for (int j = 0; j < 4; ++j)
+	for (int i = 0; i < 4; ++i)
 	{
-		const int group_size = group_sizes[j];
-		vect *in_degs = get_in_degrees(graph, group_size);
-		vect *out_degs = get_out_degrees(graph, group_size);
-		for (int i = 0; i < in_degs->size(); ++i)
-		{
-			if ((*in_degs)[i] == 0 && (*out_degs)[i] == 0) continue;
-			printf("[range %d-%d] IN: %d, OUT: %d\n", i * group_size, (i + 1) * group_size - 1, (*in_degs)[i], (*out_degs)[i]);
-		}
-
-		plot_degrees_hist(in_degs, out_degs, group_size);
-
-		delete out_degs;
-		delete in_degs;
+		plot_degrees(graph, double(group_sizes[i]));
 	}
 
 	// *** 3.4. Shortest paths *** 
@@ -111,12 +99,14 @@ int main()
 		printf("%d: Average distance = %.3lf, Eccentricity = %d\n", i, (*avg)[i], (*eccentricities)[i]);
 	}
 
-	const double d_sizes[4] = { 1, 0.5, 0.2, 0.1 };
-	for (int i = 0; i < 4; ++i)
+	const double d_sizes[6] = { 1, 0.5, 0.2, 0.1, 0.04, 0.01 };
+	for (int i = 0; i < 6; ++i)
 	{
 		const double group_size = d_sizes[i];
 		plot_metrics(metrics, group_size);
 	}
+	plot_eccenticities(metrics);
+
 	delete_metrics(metrics);
 
 	// *** 3.5. Clustering *** 
