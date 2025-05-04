@@ -3,6 +3,7 @@
 #include "headers/connected_components.h"
 #include "headers/degrees_distribution_functions.h"
 #include "headers/shortest_paths_functions.h"
+#include "headers/clustering_functions.h"
 #include <cstdio>
 
 int main()
@@ -30,10 +31,6 @@ int main()
 			add_edge(graph, curr_node, neigbour);
 		}
 	}
-
-	vect *temp = new vect({ 0, 3, 11, 101, 1001, 2000, 2222, 4000 });
-	graph_t *graph2 = create_reduced_graph(graph, temp);
-	std::swap(graph, graph2);
 
 	// *** 3.1. Node and edge counts ***
 	printf("3.1.\n");
@@ -122,6 +119,21 @@ int main()
 	// *** 3.5. Clustering *** 
 	printf("\n\n3.5.\n");
 
+	cluster_info_t *info = find_clustering(graph);
+	printf("Global clustering factor: %.3lf\n", info->global);
+	printf("Local clustering factors:\n");
+	for (int i = 0; i < node_count; ++i)
+	{
+		printf("%d: %.3lf clustered\n", i, info->local[i]);
+	}
+	for (int i = 3; i < 6; ++i)
+	{
+		const double group_size = d_sizes[i] / 5;
+		plot_clustering(info, group_size);
+	}
+
+	delete_cluster_info(info);
+
 	// *** 3.6. Malfunction and attack resistance *** 
 	printf("\n\n3.6.\n");
 
@@ -131,9 +143,7 @@ int main()
 	// *** 4. PageRank *** 
 	printf("\n\n4.\n");
 
-	delete temp;
 	delete_graph(graph);
-	delete_graph(graph2);
 	fclose(input);
 	return 0;
 }
