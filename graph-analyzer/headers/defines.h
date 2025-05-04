@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 
 #ifndef _DEBUG
 #include "matplotlib-cpp-master/matplotlibcpp.h"
@@ -11,6 +12,7 @@ namespace plt = matplotlibcpp;
 #include <math.h>
 #include <cstring>
 #include <queue>
+#include <algorithm>
 
 #define helper
 #define sq(x) ((x) * (x))

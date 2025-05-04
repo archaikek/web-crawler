@@ -5,7 +5,8 @@
 
 typedef struct
 {
-	int global_avg, diameter;
+	double global_avg;
+	int diameter;
 	vect *eccentricities;
 	std::vector<double> *avg;
 } graph_metrics_t;

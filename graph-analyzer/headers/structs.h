@@ -9,10 +9,11 @@ typedef struct
 } graph_t;
 
 graph_t *create_graph(const int node_count);
+graph_t *create_reduced_graph(const graph_t *original, vect *disabled_nodes);
 void delete_graph(graph_t *graph);
 
 std::pair<vect, vect> *get_node_copy(const graph_t *graph, const int node);
-void remove_node(graph_t *graph, const int node);
+void clear_node(graph_t *graph, const int node);
 
 inline void add_edge(graph_t *graph, const int src, const int dst)
 {

@@ -47,3 +47,4 @@ figures/*
 graph.in
 cache.txt
 times.txt
+blacklist.txt

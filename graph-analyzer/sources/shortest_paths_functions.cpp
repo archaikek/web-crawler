@@ -121,16 +121,19 @@ void plot_metrics(const graph_metrics_t *metrics, const double group_size)
 	char filename[250] = "";
 	sprintf(filename, "%s%s%.2lf.png", figures_path, "fig3_4_hist-AVG-", group_size);
 
-	char title[80];
+#ifndef _DEBUG
+	char title[250];
 	plt::figure_size(800, 600);
 	plt::plot(axes.first, axes.second, "r-");
 	plt::plot(axes.first, *line, "y--");
 	plt::xlabel("Average distance");
 	plt::ylabel("Number of nodes with given distance");
-	sprintf(title, "Distribution of average distances in graph (grouped by %.2lf)", group_size);
+	sprintf(title, "Distribution of average distances in graph (grouped by %.2lf)\napprox. %.3lfx + %.3lf\n", group_size, coeff.first, coeff.second);
 	plt::title(title);
 	plt::save(filename);
 	plt::close();
+	printf("%s", title);
+#endif
 }
 void plot_eccenticities(const graph_metrics_t *metrics)
 {
@@ -142,7 +145,8 @@ void plot_eccenticities(const graph_metrics_t *metrics)
 	char filename[250] = "";
 	sprintf(filename, "%s%s.png", figures_path, "fig3_4_hist-ECC");
 
-	char title[80];
+#ifndef _DEBUG
+	char title[250];
 	plt::figure_size(800, 600);
 	plt::plot(axes.first, axes.second, "bo");
 	for (int i = 0; i < axes.first.size(); ++i)
@@ -158,4 +162,5 @@ void plot_eccenticities(const graph_metrics_t *metrics)
 	plt::title(title);
 	plt::save(filename);
 	plt::close();
+#endif
 }

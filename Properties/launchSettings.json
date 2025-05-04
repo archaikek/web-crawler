@@ -2,7 +2,7 @@
   "profiles": {
     "web-crawler": {
       "commandName": "Project",
-      "commandLineArgs": "24"
+      "commandLineArgs": "24 https://www.u-tokyo.ac.jp/"
     }
   }
 }

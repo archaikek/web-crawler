@@ -31,6 +31,10 @@ int main()
 		}
 	}
 
+	vect *temp = new vect({ 0, 3, 11, 101, 1001, 2000, 2222, 4000 });
+	graph_t *graph2 = create_reduced_graph(graph, temp);
+	std::swap(graph, graph2);
+
 	// *** 3.1. Node and edge counts ***
 	printf("3.1.\n");
 
@@ -68,7 +72,13 @@ int main()
 	{
 		if (scc.second.size() == 1)
 		{
-			printf("%d ", scc.first);
+			printf("%d (", scc.first);
+			for (int i = 0; i < edges[scc.first].size(); ++i)
+			{
+				if (i > 0) printf(" ");
+				printf("%d", edges[scc.first][i]);
+			}
+			printf(") ");
 			++single_node_scc_count;
 		}
 	}
@@ -121,7 +131,9 @@ int main()
 	// *** 4. PageRank *** 
 	printf("\n\n4.\n");
 
+	delete temp;
 	delete_graph(graph);
+	delete_graph(graph2);
 	fclose(input);
 	return 0;
 }

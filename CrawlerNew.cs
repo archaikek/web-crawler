@@ -9,114 +9,134 @@ using TurnerSoftware.RobotsExclusionTools;
 using System.Security;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
+using System.Web;
+using Microsoft.Win32.SafeHandles;
 
 namespace web_crawler
 {
 	internal class CrawlerNew
 	{
-		private static LockableInt PagesFound = new LockableInt(1);
-		private static LockableInt crawlerCount = new LockableInt(0);
-		private static readonly int limit = 4444;
+		private static readonly int limit = 111;
 
-		public static Graph graph { get; set; } = new Graph(limit);
-		private static ConcurrentQueue<PageInfo> pendingPages = new ConcurrentQueue<PageInfo>();
-		public static ConcurrentQueue<PageInfo> PendingPages { get { return pendingPages; } }
-		private static HashSet<string> checkedUrls = new HashSet<string>();
+		public static ConcurrentDictionary<string, string> destinationCache = new ConcurrentDictionary<string, string>();
 
-		private string origin = String.Empty;
-		private RobotsFile robotsFile = null;
-		private HtmlWeb web = null;
-		private int id = -1;
+		public static Graph graph = new Graph(limit);
+		public static ConcurrentQueue<QueuedRequest> remainingRequests = new ConcurrentQueue<QueuedRequest>();
 
-		public CrawlerNew() 
+		private static Mutex indexMutex = new Mutex(false);
+		private static int index = 0;
+
+
+		private string origin { get; set; } = String.Empty;
+		private RobotsFile robotsFile { get; set; } = null;
+		private HtmlWeb web { get; set; } = null;
+		private HttpClient client { get; set; } = null;
+
+		public CrawlerNew(string _origin, RobotsFile _robotsFile)
 		{
-			lock (crawlerCount) { id = crawlerCount.Value++; }
-		}
-		public CrawlerNew(string origin, RobotsFile robotsFile)
-		{
-			lock (crawlerCount) { id = crawlerCount.Value++; }
-			this.origin = origin;
-			this.robotsFile = robotsFile;
+			origin = _origin;
+			robotsFile = _robotsFile;
 			web = new HtmlWeb();
-			web.OverrideEncoding = Encoding.UTF8;
+			web.OverrideEncoding = System.Text.Encoding.UTF8;
+			web.PreRequest += request =>
+			{
+				request.CookieContainer = new System.Net.CookieContainer();
+				return true;
+			};
+			client = new HttpClient();
+			client.Timeout = new TimeSpan(0, 0, 20);
 		}
 
 		public void CrawlLoop()
 		{
-			while (true)
+			while (index < limit)
 			{
-				if (PagesFound.Value >= limit) return;
 				CrawlNext();
 			}
 		}
-		public void CrawlNext()
+		public async void CrawlNext()
 		{
-			PageInfo page;
-			if (!pendingPages.TryDequeue(out page)) // the queue is empty
+			//if (remainingRequests.Count() > 0) Console.WriteLine($"[{Thread.CurrentThread.ManagedThreadId}] Queue state: {remainingRequests.Count()}, Index: {index}/{limit}, Found: {found.HashSet.Count()}");
+			//else Console.Write(".");
+			QueuedRequest request;
+			if (!remainingRequests.TryDequeue(out request)) // the queue is empty for some reason
 			{
-				Thread.Sleep(2221);
+				//Thread.Sleep(50); // do not clog the access to the queue with repeated attempts to access
+				// actually maybe let them spam it a bit
+				return; 
+			}
+
+			string currentUrl = NormalizeUrl(request.url);
+			//if (blacklist.Contains(currentUrl))
+			//{
+			//	Console.WriteLine($"? {currentUrl} BLACKLISTED");
+			//	return; // the url entered the blacklist in the meantime
+			//}
+			HtmlDocument currentDocument = request.document;
+			if (currentDocument is null) // failed to load the document
+			{
+				//blacklist.Add(currentUrl);
 				return;
 			}
 
-				var links = page.document.DocumentNode.SelectNodes("//a[@href]");
+			int currentIndex = GetNextIndex();
+			if (currentIndex >= limit) return; // the limit was reached somewhere in the meantime
+			graph.Nodes[currentUrl] = currentIndex;
+			Console.WriteLine($"Crawling {currentUrl}... [{currentIndex}]");
+
+			Thread saver = new Thread(() => {
+				using (FileStream fs = File.OpenWrite(MakeFileName(currentIndex, currentUrl)))
+				{
+					currentDocument.Save(fs);
+				}
+			});
+			saver.Start();
+
+			var links = currentDocument.DocumentNode.SelectNodes("//a[@href]");
+
 			foreach (var link in links)
 			{
-				/* Run a few checks before trying to load a new page */
-				var url = RemoveTagsAndGetArguments(link.GetAttributeValue("href", String.Empty));
-				if (checkedUrls.Contains(url)) continue; // skip if the link has already been found before
-				else checkedUrls.Add(url);
+				var url = link.GetAttributeValue("href", String.Empty);
+				if (string.IsNullOrEmpty(url)) continue; // something's wrong
 
-				if (url.StartsWith('/')) // if the page uses relative path links
+				url = NormalizeUrl(url);
+				if (string.IsNullOrEmpty(url)) continue; // something's wrong only now somehow
+				
+				url = NormalizeUrl(CheckFinalDestination(url));
+				if (url is null) continue;
+
+				if (!robotsFile.IsAllowedAccess(new Uri(url), "TestCrawler2221")) continue;  // Robots not allowe
+				if (graph.Nodes.ContainsKey(url)) continue; // URL already found and saved
+
+				HtmlDocument doc = web.TryLoad(url);
+				if (doc.DocumentNode.SelectNodes("//a[@href]").Count == 0)
 				{
-					url = origin + url; // prepend origin to it
-					if (checkedUrls.Contains(url)) continue;
-					else checkedUrls.Add(url);
-				}
-
-				if (!url.StartsWith(origin)) continue; // the link leads outside the main domain
-
-				/* Load the document */
-				var newDocument = web.TryLoad(url);
-				var targetUrl = web.ResponseUri.ToString();
-				if (checkedUrls.Contains(targetUrl)) continue;
-				else checkedUrls.Add(targetUrl);
-				if (!targetUrl.StartsWith(origin)) continue;
-				if (newDocument is null || newDocument.DocumentNode.SelectSingleNode("//html") is null) // if the found document is not an HTML
-				{
+					destinationCache[url] = null;
 					continue;
 				}
+				int index = GetNextIndex();
 
-				/* Add the document to the graph and the queue */
-				PageInfo newPage;
-				lock (PagesFound)
-				{
-					if (PagesFound.Value >= limit) break;
-					newPage = new PageInfo(newDocument, targetUrl, PagesFound.Value++);
-				}
-				Console.WriteLine($"[{id}] Found page {newPage.url} [{page.index} -> {newPage.index}].");
-
-				Thread saver = new Thread(() => {
-					PageInfo temp = new PageInfo(newPage.document, newPage.url, newPage.index);
-					using (FileStream fs = File.OpenWrite(MakeFileName(temp.index, temp.url)))
-					{
-						newDocument.Save(fs);
-					}
-				});
-				saver.Start();
-
-				pendingPages.Enqueue(newPage);
-				graph.Nodes.TryAdd(newPage.url, newPage.index);
-				graph.Edges[page.index].Add(newPage.index);
-
-				saver.Join();
-				Console.WriteLine($"[{id}]\tFinished processing page {newPage.index}.");
+				remainingRequests.Enqueue(new QueuedRequest(url, doc));
 			}
+			saver.Join();
+			Console.WriteLine($"Finished crawling {currentIndex}.");
 		}
 
-
-		private string RemoveTagsAndGetArguments(string url)
+		private int GetNextIndex()
+		{
+			int result;
+			indexMutex.WaitOne();
+			result = index++;
+			indexMutex.ReleaseMutex();
+			return result;
+		}
+		private string NormalizeUrl(string url)
 		{
 			string result = url;
+			if (!result.StartsWith(origin)) result = origin + (result.StartsWith('/') ? result.Substring(1) : result);
+
 			int index = result.IndexOf('?');
 			if (index != -1) result = result.Substring(0, index);
 			index = result.IndexOf('#');
@@ -124,31 +144,74 @@ namespace web_crawler
 
 			return result;
 		}
-		private string MakeFileName(int index, string currentUrl)
-		{
-			string urlSuffix = currentUrl.Substring(currentUrl.Length - 5);
-			string suffix = (Regex.Matches(urlSuffix, ".").Count >= 1 && !urlSuffix.Contains(".jp")) ? "" : ".html"; // add .html to documents that don't have it
-			return Program.pagesPath + $"{index}_{currentUrl.Replace(':', '-').Replace('/', '_').Replace('\\', '_')}{suffix}";
-		}
 
-		private class LockableInt
-		{
-			public int Value;
-			public LockableInt() { Value = 0; }
-			public LockableInt(int value) { Value = value; }
-		}
-		internal class PageInfo
-		{
-			public HtmlDocument document = null;
-			public string url = String.Empty;
-			public int index = -1;
 
-			public PageInfo() { }
-			public PageInfo(HtmlDocument document, string url, int index)
+		public static string MakeFileName(int index, string currentUrl)
+		{
+			string suffix = currentUrl.EndsWith(".html") ? "" : ".html"; // add .html to documents that don't have it
+			foreach (char c in System.IO.Path.GetInvalidFileNameChars()) currentUrl = currentUrl.Replace(c, '_');
+			return Program.pagesPath + $"{index}_{currentUrl}{suffix}";
+		}
+		private string CheckFinalDestination(string url)
+		{
+			if (destinationCache.ContainsKey(url)) return destinationCache[url];
+
+			client.BaseAddress = new Uri(url);
+			HttpResponseMessage response;
+			try
 			{
-				this.document = document;
-				this.url = url;
-				this.index = index;
+				response = client.GetAsync(client.BaseAddress).Result;
+			}
+			catch (Exception ex)
+			{
+				return destinationCache[url] = null;
+			}
+
+			destinationCache[url] = null;
+			if (response is null) return null;
+			if (response.StatusCode != HttpStatusCode.OK) return null;
+			if (!response.RequestMessage.RequestUri.ToString().StartsWith(origin)) return null;
+			if (response.Content.Headers.ContentType.MediaType != "text/html") return null;
+
+			return destinationCache[url] = response.RequestMessage.RequestUri.ToString();
+		}
+
+		public class QueuedRequest
+		{
+			public string url;
+			public HtmlDocument document;
+			public QueuedRequest(string _url, HtmlDocument _document)
+			{
+				url = _url;
+				document = _document;
+			}
+		}
+		public class ConcurrentHashset<T> : HashSet<T>
+		{
+			private Mutex mutex;
+			private HashSet<T> hashSet;
+			public HashSet<T> HashSet { get { return hashSet; } }
+			public ConcurrentHashset()
+			{
+				mutex = new Mutex(false);
+				hashSet = new HashSet<T>();
+			}
+
+			public new bool Add(T item)
+			{
+				bool result;
+				mutex.WaitOne();
+				result = hashSet.Add(item);
+				mutex.ReleaseMutex();
+				return result;
+			}
+			public new bool Contains(T item)
+			{
+				bool result;
+				mutex.WaitOne();
+				result = hashSet.Contains(item);
+				mutex.ReleaseMutex();
+				return result;
 			}
 		}
 	}

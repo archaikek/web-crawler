@@ -100,7 +100,7 @@ namespace web_crawler
 				index = url.IndexOf('#');
 				if (index != -1) url = url.Substring(0, index);
 
-				url = CheckFinalDestination(url, origin);
+				url = CheckFinalDestination(web, url, origin);
 				if (url is null) continue;
 
 				index = url.IndexOf('?'); // do this again for good measure
@@ -145,7 +145,7 @@ namespace web_crawler
 			foreach (char c in System.IO.Path.GetInvalidFileNameChars())currentUrl = currentUrl.Replace(c, '_');
 			return Program.pagesPath + $"{index}_{currentUrl}{suffix}";
 		}
-		public static string CheckFinalDestination(string url, string origin)
+		public static string CheckFinalDestination(HtmlWeb web, string url, string origin)
 		{
 			if (destinationCache.ContainsKey(url)) return destinationCache[url];
 
@@ -167,6 +167,10 @@ namespace web_crawler
 			if (response.StatusCode != HttpStatusCode.OK) return null;
 			if (!response.RequestMessage.RequestUri.ToString().StartsWith(origin)) return null;
 			if (response.Content.Headers.ContentType.MediaType != "text/html") return null;
+
+			HtmlDocument doc = web.TryLoad(url);
+			var links = doc.DocumentNode.SelectNodes("//a[@href]");
+			if (links is null || links.Count <= 4) return null;
 
 			return destinationCache[url] = response.RequestMessage.RequestUri.ToString();
 		}

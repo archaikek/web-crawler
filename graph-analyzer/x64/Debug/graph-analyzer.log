@@ -1,18 +1,15 @@
-﻿  main.cpp
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(43,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(43,9):
-      consider using '%zd' in the format string
-  
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(47,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(47,10):
-      consider using '%zd' in the format string
-  
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(55,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(55,9):
-      consider using '%zd' in the format string
-  
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(60,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(60,11):
-      consider using '%zd' in the format string
-  
+﻿  structs.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(17,56): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(17,34): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(40,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(40,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(68,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(68,26): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(69,49): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(69,26): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(75,53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(75,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(89,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(89,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(113,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   graph-analyzer.vcxproj -> C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\x64\Debug\graph-analyzer.exe
