@@ -1,5 +1,11 @@
 #include "../headers/clustering_functions.h"
 
+static char filename[250];
+void set_clustering_filename(const char *new_filename)
+{
+	strcpy(filename, new_filename);
+}
+
 static int **paths2;
 static int *visited, run_count;
 static void init_clustering_vars(const int node_count)
@@ -77,11 +83,8 @@ void plot_clustering(const cluster_info_t *info, const double group_size)
 {
 	std::vector<double> *local = new std::vector<double>(info->local, info->local + info->node_count);
 	std::pair<std::vector<double>, std::vector<int>> axes = make_histogram(local, group_size);
-	std::pair<double, double> coeff = regress_linear(&(axes.first), &(axes.second));
+	coefficient_t coeff = regress_linear(&(axes.first), &(axes.second));
 	std::vector<double> *line = make_line(&(axes.first), coeff, calculate_linear_fun);
-
-	char filename[250] = "";
-	sprintf(filename, "%s%s%.3lf.png", figures_path, "fig3_5_hist-LOC-", group_size);
 
 #ifndef _DEBUG
 	char title[250];
@@ -90,14 +93,10 @@ void plot_clustering(const cluster_info_t *info, const double group_size)
 	plt::plot(axes.first, *line, "y--");
 	plt::xlabel("Local Clustering Factor");
 	plt::ylabel("Number of nodes with given local clustering factor");
-	sprintf(title, "Distribution of local clustering factors in graph (grouped by %.3lf)\napprox. %.3lfx + %.3lf\n", group_size, coeff.first, coeff.second);
+	sprintf(title, "Distribution of local clustering factors in graph (grouped by %.3lf)\napprox. %.3lfx + %.3lf; MSE=%.3lf\n", group_size, coeff.a, coeff.b, coeff.error);
 	plt::title(title);
 	plt::save(filename);
 	plt::close();
 	printf("%s", title);
 #endif
-#ifndef  _DEBUG
-
-#endif // ! _DEBUG
-
 }

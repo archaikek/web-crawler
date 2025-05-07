@@ -14,3 +14,5 @@ void delete_cluster_info(cluster_info_t *info);
 cluster_info_t *find_clustering(const graph_t *graph);
 
 void plot_clustering(const cluster_info_t *info, const double group_size);
+
+void set_clustering_filename(const char *new_filename);

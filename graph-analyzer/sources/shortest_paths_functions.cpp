@@ -1,5 +1,12 @@
 #include "../headers/shortest_paths_functions.h"
 
+static char filename[250];
+
+void set_shortest_paths_filename(const char *new_filename)
+{
+	strcpy(filename, new_filename);
+}
+
 static unsigned int **shortest_paths;
 static int *visited, run_count;
 static void init_shortest_paths_vars(const int node_count)
@@ -115,11 +122,8 @@ void plot_metrics(const graph_metrics_t *metrics, const double group_size)
 {
 	helper std::vector<double> *avg = metrics->avg;
 	std::pair<std::vector<double>, std::vector<int>> axes = make_histogram(avg, group_size);
-	std::pair<double, double> coeff = regress_linear(&(axes.first), &(axes.second));
+	coefficient_t coeff = regress_linear(&(axes.first), &(axes.second));
 	std::vector<double> *line = make_line(&(axes.first), coeff, calculate_linear_fun);
-
-	char filename[250] = "";
-	sprintf(filename, "%s%s%.2lf.png", figures_path, "fig3_4_hist-AVG-", group_size);
 
 #ifndef _DEBUG
 	char title[250];
@@ -128,7 +132,7 @@ void plot_metrics(const graph_metrics_t *metrics, const double group_size)
 	plt::plot(axes.first, *line, "y--");
 	plt::xlabel("Average distance");
 	plt::ylabel("Number of nodes with given distance");
-	sprintf(title, "Distribution of average distances in graph (grouped by %.2lf)\napprox. %.3lfx + %.3lf\n", group_size, coeff.first, coeff.second);
+	sprintf(title, "Distribution of average distances in graph (grouped by %.2lf)\napprox. %.3lfx + %.3lf; MSE=%.3lf\n", group_size, coeff.a, coeff.b, coeff.error);
 	plt::title(title);
 	plt::save(filename);
 	plt::close();
@@ -141,9 +145,6 @@ void plot_eccenticities(const graph_metrics_t *metrics)
 	std::pair<std::vector<double>, std::vector<int>> axes = make_histogram(eccentricities, 1);
 	//std::pair<double, double> coeff = regress_linear(&(axes.first), &(axes.second));
 	//std::vector<double> *line = make_line(&(axes.first), coeff, calculate_linear_fun);
-
-	char filename[250] = "";
-	sprintf(filename, "%s%s.png", figures_path, "fig3_4_hist-ECC");
 
 #ifndef _DEBUG
 	char title[250];

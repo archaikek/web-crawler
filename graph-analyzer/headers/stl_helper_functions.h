@@ -2,21 +2,33 @@
 
 #include "defines.h"
 
-template <typename T>
-static void remove_duplicates(std::vector<T> *v);
+typedef struct
+{
+	double a, b;
+	double error;
+} coefficient_t;
 
-inline double calculate_power_fun(const std::pair<double, double> coeff, const double x)
+template <typename T>
+void remove_duplicates(std::vector<T> *v)
 {
-	return pow(x, coeff.first) * pow(10, coeff.second);
+	std::unordered_set<T> *temp = new std::unordered_set<T>(v->begin(), v->end());
+	v->clear();
+	v->insert(v->begin(), temp->begin(), temp->end());
+	delete temp;
 }
-inline double calculate_linear_fun(const std::pair<double, double> coeff, const double x)
+
+inline double calculate_power_fun(const coefficient_t coeff, const double x)
 {
-	return x * coeff.first + coeff.second;
+	return pow(x, coeff.a) * pow(10, coeff.b);
 }
-std::vector<double> *make_line(const std::vector<double> *X, const std::pair<double, double> coeff, 
-	double (*calc_fun)(const std::pair<double, double>, const double));
+inline double calculate_linear_fun(const coefficient_t coeff, const double x)
+{
+	return x * coeff.a + coeff.b;
+}
+std::vector<double> *make_line(const std::vector<double> *X, coefficient_t coeff,
+	double (*calc_fun)(const coefficient_t, const double));
 template <typename data_type_x, typename data_type_y>
-std::pair<double, double> regress_power(const std::vector<data_type_x> *X, const std::vector<data_type_y> *Y)
+coefficient_t regress_power(const std::vector<data_type_x> *X, const std::vector<data_type_y> *Y)
 {
 	helper const int data_size = X->size();
 	double s = data_size;
@@ -34,19 +46,30 @@ std::pair<double, double> regress_power(const std::vector<data_type_x> *X, const
 		double logx = log10(x);
 		double logy = log10(y);
 
-
 		sx += logx;
 		sy += logy;
 		sxx += sq(logx);
 		sxy += logx * logy;
 		syy += sq(logy);
 	}
-
 	double delta = s * sxx - sq(sx);
-	return std::make_pair((s * sxy - sx * sy) / delta, (sxx * sy - sx * sxy) / delta);
+	double a = (s * sxy - sx * sy) / delta, b = (sxx * sy - sx * sxy) / delta;
+	double error = 0;
+	for (int i = 0; i < data_size; ++i)
+	{
+		const double x = double((*X)[i]);
+		const double y = double((*Y)[i]);
+		if (x < 0.9 || y < 0.9) continue;
+		double logx = log10(x);
+		double logy = log10(y);
+		error += sq(logy - a * logx - b);
+	}
+	error /= s;
+
+	return {a, b, error};
 }
 template <typename data_type_x, typename data_type_y>
-std::pair<double, double> regress_linear(const std::vector<data_type_x> *X, const std::vector<data_type_y> *Y)
+coefficient_t regress_linear(const std::vector<data_type_x> *X, const std::vector<data_type_y> *Y)
 {
 	helper const int data_size = X->size();
 	double s = data_size;
@@ -56,46 +79,50 @@ std::pair<double, double> regress_linear(const std::vector<data_type_x> *X, cons
 	{
 		const double x = double((*X)[i]);
 		const double y = double((*Y)[i]);
-		if (x < 0.9 || y < 0.9)
-		{
-			--s;
-			continue;
-		}
-
 		sx += x;
 		sy += y;
 		sxx += sq(x);
 		sxy += x * y;
 		syy += sq(y);
 	}
-
 	double delta = s * sxx - sq(sx);
-	return std::make_pair((s * sxy - sx * sy) / delta, (sxx * sy - sx * sxy) / delta);
+	double a = (s * sxy - sx * sy) / delta, b = (sxx * sy - sx * sxy) / delta;
+	double error = 0;
+	for (int i = 0; i < data_size; ++i)
+	{
+		const double x = double((*X)[i]);
+		const double y = double((*Y)[i]);
+		error += sq(y - a * x - b);
+	}
+	error /= data_size;
+
+	return {a, b, error};
 }
 template <typename data_type>
 std::pair<std::vector<double>, std::vector<int>> make_histogram(const std::vector<data_type> *Y, const double group_size)
 {
 	std::pair<std::vector<double>, std::vector<int>> result;
 
-	double max_val = 0;
+	double max_val = -1e9, min_val = 1e9;
 	helper const int data_size = Y->size();
 	helper const data_type *data = &((*Y)[0]);
 	for (int i = 0; i < data_size; ++i)
 	{
 		max_val = std::max(max_val, double(data[i]));
+		min_val = std::min(min_val, double(data[i]));
 	}
 
-	const int result_size = int(ceil(max_val / group_size)) + 2;
+	const int result_size = int(ceil((max_val - min_val) / group_size)) + 2;
 	result.first.resize(result_size);
 	result.second.resize(result_size);
 	for (int i = 0; i < result_size; ++i)
 	{
 		result.second[i] = 0;
-		result.first[i] = i * group_size;
+		result.first[i] = min_val + i * group_size;
 	}
 	for (int i = 0; i < data_size; ++i)
 	{
-		++result.second[int(floor(double(data[i]) / group_size))];
+		++result.second[int(floor(double(data[i] - min_val) / group_size))];
 	}
 
 	return result;

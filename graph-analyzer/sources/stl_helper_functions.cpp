@@ -1,16 +1,7 @@
 #include "../headers/stl_helper_functions.h"
 
-template <typename T> 
-static void remove_duplicates(std::vector<T> *v)
-{
-	std::unordered_set<T> *temp = new std::unordered_set<T>(v->begin(), v->end());
-	v->clear();
-	v->insert(v->begin(), temp->begin(), temp->end());
-	delete temp;
-}
-
-std::vector<double> *make_line(const std::vector<double> *X, const std::pair<double, double> coeff, 
-	double (*calc_fun)(const std::pair<double, double>, const double))
+std::vector<double> *make_line(const std::vector<double> *X, coefficient_t coeff,
+	double (*calc_fun)(const coefficient_t, const double))
 {
 	helper const int size = X->size();
 	helper const double *data = &((*X)[0]);

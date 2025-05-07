@@ -22,10 +22,10 @@ namespace web_crawler
 			{
 				Directory.CreateDirectory(pagesPath);
 			}
-			if (File.Exists(pagesPath + cacheFilename))
-			{
-				LoadCache(Crawler.destinationCache);
-			}
+			//if (File.Exists(pagesPath + cacheFilename))
+			//{
+			//	LoadCache(Crawler.destinationCache);
+			//}
 
 			int threadCount = 1;
 			try { threadCount = Int32.Parse(args[0]); } catch { threadCount = 12; }
@@ -38,7 +38,7 @@ namespace web_crawler
 
 			var watch = System.Diagnostics.Stopwatch.StartNew();
 
-			var robotsFileParser = new RobotsFileParser();
+/*			var robotsFileParser = new RobotsFileParser();
 			Task<RobotsFile> robotsFileTask = robotsFileParser.FromUriAsync(new Uri($"{origin}/robots.txt"));
 			var robotsFile = robotsFileTask.Result;
 
@@ -54,7 +54,7 @@ namespace web_crawler
 
 			while (Crawler.urlQueue.Count < threadCount * 2 && Crawler.urlQueue.Count > 0) crawlers[0].CrawlNext();
 
-			//threadCount = 1; // uncomment this to simulate a single-threaded crawler
+			threadCount = 1; // uncomment this to simulate a single-threaded crawler
 			Task[] tasks = new Task[threadCount - 1];
 			for (int i = 1; i < threadCount; ++i)
 			{
@@ -63,20 +63,52 @@ namespace web_crawler
 			}
 			crawlers[0].CrawlLoop();
 
+			Task.WaitAll(tasks);*/
+
+			var robotsFileParser = new RobotsFileParser();
+			var robotsFile = robotsFileParser.FromUriAsync(new Uri($"{origin}/robots.txt")).Result;
+			HtmlWeb web = new HtmlWeb();
+			web.OverrideEncoding = Encoding.UTF8;
+
+			CrawlerNew.found.Add(origin);
+			CrawlerNew.found.Add($"{origin}ja/index.html");
+			CrawlerNew.graph.Nodes[origin] = 0;
+			CrawlerNew.remaining.Enqueue(new CrawlerNew.QueuedRequest(origin, web.LoadFromWebAsync(origin)));
+
+			//threadCount = 1; // uncomment this to simulate a single-threaded crawler
+			CrawlerNew[] crawlers = new CrawlerNew[threadCount];
+			Task[] tasks = new Task[threadCount];
+			for (int i = 0; i < threadCount; ++i)
+			{
+				var crawler = crawlers[i] = new CrawlerNew(origin, robotsFile);
+				int index = i;
+				tasks[index] = Task.Factory.StartNew(() => 
+				{
+					Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId} started on index {index}.");
+					try
+					{
+						crawler.CrawlLoop();
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine($"!!! {Thread.CurrentThread.ManagedThreadId} {ex.Message}\n{ex.StackTrace}");
+					}
+				}, TaskCreationOptions.LongRunning);
+			}
 			Task.WaitAll(tasks);
 
 			watch.Stop();
 			var timeElapsed = watch.ElapsedMilliseconds;
 
 			//Console.WriteLine(Crawler.graph);
-			Thread cacheSaver = new Thread(() => {
-				SaveCache(Crawler.destinationCache);
-			});
-			cacheSaver.Start();
-			File.WriteAllText(pagesPath + graphFilename, $"{Crawler.graph.Nodes.Count}\n" + Crawler.graph.ToString());
+			//Thread cacheSaver = new Thread(() => {
+			//	SaveCache(Crawler.destinationCache);
+			//});
+			//cacheSaver.Start();
+			File.WriteAllText(pagesPath + graphFilename, $"{CrawlerNew.graph.Nodes.Count}\n" + CrawlerNew.graph.ToString());
 
-			File.AppendAllText(pagesPath + timeFilename, $"{DateTime.Now}: Gathered {Crawler.graph.Nodes.Count} pages in {timeElapsed} ms using {threadCount} threads.\n");
-			cacheSaver.Join();
+			File.AppendAllText(pagesPath + timeFilename, $"{DateTime.Now}: Gathered {CrawlerNew.graph.Nodes.Count} pages in {timeElapsed} ms using {threadCount} threads.\n");
+			//cacheSaver.Join();
 		}
 
 		private static void LoadCache(ConcurrentDictionary<string, string> cache)

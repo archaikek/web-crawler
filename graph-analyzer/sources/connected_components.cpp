@@ -202,14 +202,20 @@ static void make_scc_graph(cc_info_t *info)
 			if (e_size > 0)
 			{
 				helper const int *e_neighbours = &(edges[node][0]);
-				for (int k = 0; k < e_size; ++k) add_edge(cc_graph, i, scc_rep[(*temp)[e_neighbours[k]]]);
+				for (int k = 0; k < e_size; ++k) if (i != scc_rep[(*temp)[e_neighbours[k]]]) add_edge(cc_graph, i, scc_rep[(*temp)[e_neighbours[k]]]);
+
 			}
 			if (t_size > 0)
 			{
 				helper const int *t_neighbours = &(transposed[node][0]);
-				for (int k = 0; k < t_size; ++k) add_edge(cc_graph, i, scc_rep[(*temp)[t_neighbours[k]]]);
+				for (int k = 0; k < t_size; ++k) if (i != scc_rep[(*temp)[t_neighbours[k]]]) add_edge(cc_graph, i, scc_rep[(*temp)[t_neighbours[k]]]);
 			}
 		}
+	}
+	for (int i = 0; i < scc_count; ++i)
+	{
+		remove_duplicates(cc_graph->edges + i);
+		remove_duplicates(cc_graph->transposed + i);
 	}
 	delete temp;
 }

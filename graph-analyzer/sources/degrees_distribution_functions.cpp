@@ -1,5 +1,16 @@
 #include "../headers/degrees_distribution_functions.h"
 
+static char in_filename[250], out_filename[250];
+
+void set_in_filename(const char *filename)
+{
+	strcpy(in_filename, filename);
+}
+void set_out_filename(const char *filename)
+{
+	strcpy(out_filename, filename);
+}
+
 vect *get_in_degrees(const graph_t *graph)
 {
 	helper const int node_count = graph->node_count;
@@ -29,23 +40,19 @@ void plot_degrees(const graph_t *graph, const double group_size)
 	vect *out_degs = get_out_degrees(graph);
 	std::pair<std::vector<double>, std::vector<int>> in_axes = make_histogram(in_degs, group_size);
 	std::pair<std::vector<double>, std::vector<int>> out_axes = make_histogram(out_degs, group_size);
-	std::pair<double, double> in_coeff = regress_power(&(in_axes.first), &(in_axes.second));
-	std::pair<double, double> out_coeff = regress_power(&(out_axes.first), &(out_axes.second));
+	coefficient_t in_coeff = regress_power(&(in_axes.first), &(in_axes.second));
+	coefficient_t out_coeff = regress_power(&(out_axes.first), &(out_axes.second));
 	std::vector<double> *in_line = make_line(&(in_axes.first), in_coeff, calculate_power_fun);
 	std::vector<double> *out_line = make_line(&(out_axes.first), out_coeff, calculate_power_fun);
 
 #ifndef _DEBUG
-	char in_filename[250], out_filename[250];
-	sprintf(in_filename, "%s%s%.0lf.png", figures_path, "fig3_3_hist-IN-", group_size);
-	sprintf(out_filename, "%s%s%.0lf.png", figures_path, "fig3_3_hist-OUT-", group_size);
-
 	char title[250];
 	plt::figure_size(800, 600);
 	plt::loglog(in_axes.first, in_axes.second, "r.");
 	plt::loglog(in_axes.first, *in_line, "y-");
 	plt::xlabel("Node in-degree");
 	plt::ylabel("Number of nodes with given in-degrees");
-	sprintf(title, "Distribution of in-degrees in graph (grouped by %.0lf)\napprox. x^%.3lf * %.3lf\n", group_size, in_coeff.first, pow(10, in_coeff.second));
+	sprintf(title, "Distribution of in-degrees in graph (grouped by %.0lf)\napprox. x^%.3lf * %.3lf; MSE=%.3lf\n", group_size, in_coeff.a, pow(10, in_coeff.b), in_coeff.error);
 	plt::title(title);
 	plt::save(in_filename);
 	plt::close();
@@ -56,7 +63,7 @@ void plot_degrees(const graph_t *graph, const double group_size)
 	plt::loglog(out_axes.first, *out_line, "b-");
 	plt::xlabel("Node out-degree");
 	plt::ylabel("Number of nodes with given out-degrees");
-	sprintf(title, "Distribution of out-degrees in graph (grouped by %.0lf)\napprox. x^%.3lf * %.3lf\n", group_size, out_coeff.first, pow(10, out_coeff.second));
+	sprintf(title, "Distribution of out-degrees in graph (grouped by %.0lf)\napprox. x^%.3lf * %.3lf; MSE=%.3lf\n", group_size, out_coeff.a, pow(10, out_coeff.b), out_coeff.error);
 	plt::title(title);
 	plt::save(out_filename);
 	plt::close();

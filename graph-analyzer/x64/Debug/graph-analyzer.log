@@ -1,18 +1,19 @@
-﻿  main.cpp
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(49,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(49,9):
+﻿  resistance_check_functions.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(20,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(49,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(49,11):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(53,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(53,10):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(53,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(53,12):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(61,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(61,9):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(61,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(61,11):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(66,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(66,11):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(66,13): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(66,13):
       consider using '%zd' in the format string
   
   graph-analyzer.vcxproj -> C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\x64\Debug\graph-analyzer.exe
