@@ -49,7 +49,6 @@ static void reconnect_to_lowest(int *rep, int *sizes, const int node_count)
 
 // weakly connected components tables
 static int *wcc_rep, *wcc_sizes;
-static bool *visited;
 // strongly conntected components tables
 static int *indices, *lowlink, *scc_rep, index;
 static bool *on_stack;
@@ -59,7 +58,6 @@ static void init_wcc_vars(const int node_count)
 {
 	wcc_rep =	(int *)malloc(node_count * sizeof(int));
 	wcc_sizes = (int *)malloc(node_count * sizeof(int));
-	visited =	(bool *)calloc(node_count, sizeof(bool));
 	for (int i = 0; i < node_count; ++i)
 	{
 		wcc_rep[i] = i;
@@ -68,7 +66,6 @@ static void init_wcc_vars(const int node_count)
 }
 static void clear_wcc_vars()
 {
-	free(visited);
 	free(wcc_sizes);
 	free(wcc_rep);
 }
@@ -97,19 +94,9 @@ static void clear_scc_vars()
 // standard DFS with find and union connections
 static void weakconnect(const vect *edges, const int node)
 {
-	visited[node] = true;
-	
 	helper const int size = edges[node].size();	if (size == 0) return;
 	helper const int *neighbours = &(edges[node][0]);
-	for (int i = 0; i < size; ++i)
-	{
-		helper const int neighbour = neighbours[i];
-		if (!visited[neighbour])
-		{
-			onion(wcc_rep, wcc_sizes, node, neighbour);
-			weakconnect(edges, neighbour);
-		}
-	}
+	for (int i = 0; i < size; ++i) onion(wcc_rep, wcc_sizes, node, neighbours[i]);
 }
 cc_info_t *find_wcc(graph_t *graph)
 {
@@ -123,7 +110,7 @@ cc_info_t *find_wcc(graph_t *graph)
 	init_wcc_vars(node_count);
 	for (int i = 0; i < node_count; ++i)
 	{
-		if (!visited[i]) weakconnect(edges, i);
+		weakconnect(edges, i);
 	}
 	reconnect_to_lowest(wcc_rep, wcc_sizes, node_count);
 	for (int i = 0; i < node_count; ++i)

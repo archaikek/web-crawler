@@ -1,19 +1,262 @@
-﻿  resistance_check_functions.cpp
+﻿  main.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(48,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(48,9):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(52,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(52,10):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(73,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(73,9):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(77,10): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp(77,10):
+      consider using '%zd' in the format string
+  
+  clustering_functions.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp(44,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp(44,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp(49,50): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp(49,27): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp(69,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp(69,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/clustering_functions.cpp')
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,38):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp(85,58):
+          see reference to function template instantiation 'std::pair<std::vector<double,std::allocator<double>>,std::vector<int,std::allocator<int>>> make_histogram<double>(const std::vector<double,std::allocator<double>> *,const double)' being compiled
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  (compiling source file 'sources/clustering_functions.cpp')
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(74,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/clustering_functions.cpp')
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(74,38):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp(86,24):
+          see reference to function template instantiation 'coefficient_t regress_linear<double,int>(const std::vector<double,std::allocator<double>> *,const std::vector<int,std::allocator<int>> *)' being compiled
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(74,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  (compiling source file 'sources/clustering_functions.cpp')
+  
+  connected_components.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(97,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(97,24): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(132,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(132,24): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(165,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(165,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(174,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(183,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(183,31): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(187,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(187,28): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(188,51): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp(188,28): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  connectivity_functions.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp(25,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp(25,24): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp(63,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp(63,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp(65,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp(65,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp(102,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp(102,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  degrees_distribution_functions.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\degrees_distribution_functions.cpp(21,67): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\degrees_distribution_functions.cpp(32,62): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/degrees_distribution_functions.cpp')
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,38):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\degrees_distribution_functions.cpp(41,61):
+          see reference to function template instantiation 'std::pair<std::vector<double,std::allocator<double>>,std::vector<int,std::allocator<int>>> make_histogram<int>(const std::vector<int,std::allocator<int>> *,const double)' being compiled
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  (compiling source file 'sources/degrees_distribution_functions.cpp')
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(33,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/degrees_distribution_functions.cpp')
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(33,38):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\degrees_distribution_functions.cpp(43,27):
+          see reference to function template instantiation 'coefficient_t regress_power<double,int>(const std::vector<double,std::allocator<double>> *,const std::vector<int,std::allocator<int>> *)' being compiled
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(33,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  (compiling source file 'sources/degrees_distribution_functions.cpp')
+  
+  pagerank.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\pagerank.cpp(43,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\pagerank.cpp(43,26): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/pagerank.cpp')
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,38):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\pagerank.cpp(60,58):
+          see reference to function template instantiation 'std::pair<std::vector<double,std::allocator<double>>,std::vector<int,std::allocator<int>>> make_histogram<double>(const std::vector<double,std::allocator<double>> *,const double)' being compiled
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  (compiling source file 'sources/pagerank.cpp')
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(33,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/pagerank.cpp')
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(33,38):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\pagerank.cpp(61,24):
+          see reference to function template instantiation 'coefficient_t regress_power<double,int>(const std::vector<double,std::allocator<double>> *,const std::vector<int,std::allocator<int>> *)' being compiled
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(33,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  (compiling source file 'sources/pagerank.cpp')
+  
+  resistance_check_functions.cpp
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(20,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(49,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(49,11):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(45,16): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(45,16):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(53,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(53,12):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(56,17): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(56,17):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(61,11): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(61,11):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(61,18): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(61,18):
       consider using '%zd' in the format string
   
-C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(66,13): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
-      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(66,13):
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(82,17): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(82,17):
       consider using '%zd' in the format string
   
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(87,18): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(87,18):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(151,17): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(151,17):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(161,17): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(161,17):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(227,16): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(227,16):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(238,17): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(238,17):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(243,18): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(243,18):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(264,17): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(264,17):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(269,18): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(269,18):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(333,17): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(333,17):
+      consider using '%zd' in the format string
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(343,17): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(343,17):
+      consider using '%zd' in the format string
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(406,61): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/resistance_check_functions.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(406,61):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp(57,16):
+          see reference to function template instantiation 'void std::vector<int,std::allocator<int>>::emplace_back<unsigned __int64>(unsigned __int64 &&)' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\vector(858,24):
+          see reference to function template instantiation '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<unsigned __int64>(unsigned __int64 &&)' being compiled
+          with
+          [
+              _Ty=int
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\vector(776,20):
+          see reference to function template instantiation '_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<unsigned __int64>(unsigned __int64 &&)' being compiled
+          with
+          [
+              _Ty=int
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\vector(791,18):
+          see reference to function template instantiation 'void std::_Construct_in_place<int,_Ty>(int &,_Ty &&) noexcept' being compiled
+          with
+          [
+              _Ty=unsigned __int64
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(700,82): warning C4267: 'initializing': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(700,82): warning C4267:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(700,82): warning C4267:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(700,82): warning C4267:             _Ty=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(700,82): warning C4267:         ]
+  (compiling source file 'sources/resistance_check_functions.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(700,82):
+      the template instantiation context (the oldest one first) is
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\vector(779,17):
+          see reference to function template instantiation 'int *std::vector<int,std::allocator<int>>::_Emplace_reallocate<_Ty>(int *const ,_Ty &&)' being compiled
+          with
+          [
+              _Ty=unsigned __int64
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\vector(830,23):
+          see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,unsigned __int64>(_Alloc &,_Objty *const ,unsigned __int64 &&)' being compiled
+          with
+          [
+              _Alloc=std::allocator<int>,
+              _Ty=int,
+              _Objty=int
+          ]
+  
+  shortest_paths_functions.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\shortest_paths_functions.cpp(57,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\shortest_paths_functions.cpp(57,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\shortest_paths_functions.cpp(103,21): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/shortest_paths_functions.cpp')
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,38):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\shortest_paths_functions.cpp(124,58):
+          see reference to function template instantiation 'std::pair<std::vector<double,std::allocator<double>>,std::vector<int,std::allocator<int>>> make_histogram<double>(const std::vector<double,std::allocator<double>> *,const double)' being compiled
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(107,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  (compiling source file 'sources/shortest_paths_functions.cpp')
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(74,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'sources/shortest_paths_functions.cpp')
+      C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(74,38):
+      the template instantiation context (the oldest one first) is
+          C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\shortest_paths_functions.cpp(125,24):
+          see reference to function template instantiation 'coefficient_t regress_linear<double,int>(const std::vector<double,std::allocator<double>> *,const std::vector<int,std::allocator<int>> *)' being compiled
+  
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\headers\stl_helper_functions.h(74,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  (compiling source file 'sources/shortest_paths_functions.cpp')
+  
+  stl_helper_functions.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\stl_helper_functions.cpp(6,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\stl_helper_functions.cpp(6,24): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  structs.cpp
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(17,56): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(17,34): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(40,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(40,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(68,44): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(68,26): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(69,49): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(69,26): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(75,53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(75,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(89,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(89,25): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\structs\structs.cpp(113,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   graph-analyzer.vcxproj -> C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\x64\Debug\graph-analyzer.exe

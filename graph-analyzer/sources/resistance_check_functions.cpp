@@ -10,6 +10,7 @@ static void init_resistance_vars(const graph_t *graph)
 	srand(2221);
 	helper const int node_count = graph->node_count;
 	helper const vect *edges = graph->edges;
+	helper const vect *transposed = graph->transposed;
 	random_nodes = (int *)malloc(node_count * sizeof(int));
 	biggest_nodes = (int *)malloc(node_count * sizeof(int));
 	sizes = (int *)malloc(node_count * sizeof(int));
@@ -17,7 +18,7 @@ static void init_resistance_vars(const graph_t *graph)
 	for (int i = 0; i < node_count; ++i)
 	{
 		random_nodes[i] = biggest_nodes[i] = i;
-		sizes[i] = edges[i].size();
+		sizes[i] = edges[i].size() + transposed[i].size();
 	}
 	std::sort(biggest_nodes, biggest_nodes + node_count, comp);
 	std::random_shuffle(random_nodes, random_nodes + node_count);

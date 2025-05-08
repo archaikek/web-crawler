@@ -55,7 +55,7 @@ double *get_pagerank(const graph_t *graph, const double damping, const double pr
 	free(results[prev_iter(iter)]);
 	return results[this_iter(iter)];
 }
-void plot_pagerank(std::vector<double> *pagerank, const double group_size)
+void plot_pagerank(std::vector<double> *pagerank, const double damping, const double group_size)
 {
 	std::pair<std::vector<double>, std::vector<int>> axes = make_histogram(pagerank, group_size);
 	coefficient_t coeff = regress_power(&(axes.first), &(axes.second));
@@ -68,7 +68,7 @@ void plot_pagerank(std::vector<double> *pagerank, const double group_size)
 	plt::loglog(axes.first, *line, "y--");
 	plt::xlabel("Pagerank value");
 	plt::ylabel("Number of nodes with given PageRank");
-	sprintf(title, "PageRank distribution in graph (grouped by %.3lf)\napprox. %.3lfx + %.3lf; MSE=%.3lf", group_size, coeff.a, coeff.b, coeff.error);
+	sprintf(title, "PageRank distribution in graph with a=%.3lf (grouped by %.3lf)\napprox. %.3lfx + %.3lf; MSE=%.3lf", damping, group_size, coeff.a, coeff.b, coeff.error);
 	plt::title(title);
 	plt::save(filename);
 	plt::close();

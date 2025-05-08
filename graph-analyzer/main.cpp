@@ -34,7 +34,7 @@ int main()
 		}
 	}
 
-	// *** 3.1. Node and edge counts ***
+	//// *** 3.1. Node and edge counts ***
 	//printf("3.1.\n");
 
 	//printf("Node count: %d\n", get_node_count(graph));
@@ -172,16 +172,16 @@ int main()
 
 	//delete_cluster_info(info);
 
-	// *** 3.6. Malfunction and attack resistance *** 
-	printf("\n\n3.6.\n");
+	//// *** 3.6. Malfunction and attack resistance *** 
+	//printf("\n\n3.6.\n");
 
-	vect *failures = new vect({ 44, 111, 444, 1111, 2222, 3333});
-	run_random_failures(graph, failures);
-	run_attacks(graph, failures);
-	delete failures;
+	//vect *failures = new vect({ 44, 111, 444, 1111, 2222, 3333 });
+	//run_random_failures(graph, failures);
+	//run_attacks(graph, failures);
+	//delete failures;
 
-	// *** 3.7. Connectivity *** 
-	printf("\n\n3.7.\n");
+	//// *** 3.7. Connectivity *** 
+	//printf("\n\n3.7.\n");
 
 
 	// *** 4. PageRank *** 
@@ -189,21 +189,21 @@ int main()
 	char pr_filename[250] = "";
 	sprintf(pr_filename, "%sfig4-pagerank", figures_path);
 	double factors[8] = { 0.2, 0.5, 0.75, 0.85, 0.95, 1, 1.001, 1.1 };
-	for (int j = 0; j < 8; ++j)
+	for (int j = 0; j < 7; ++j)
 	{
 		const double factor = factors[j];
 
 		double *pagerank = get_pagerank(graph, factor, 1e-10);
 		if (pagerank == NULL) continue;
-		//for (int i = 0; i < node_count; ++i)
-		//{
-		//	printf("PageRank[%d] = %.9lf\n", i, pagerank[i]/* * node_count*/);
-		//}
+		for (int i = 0; i < node_count; ++i)
+		{
+			printf("PageRank[%d] = %.9lf\n", i, pagerank[i]/* * node_count*/);
+		}
 		sprintf(pr_filename, "%sfig4-pagerank-%.3lf.png", figures_path, factor);
 		set_pagerank_filename(pr_filename);
 		printf("??? %s\n", pr_filename);
 		std::vector<double> *v_pagerank = new std::vector<double>(pagerank, pagerank + node_count);
-		plot_pagerank(v_pagerank, 0.01);
+		plot_pagerank(v_pagerank, factor, 0.01);
 
 		delete v_pagerank;
 		free(pagerank);

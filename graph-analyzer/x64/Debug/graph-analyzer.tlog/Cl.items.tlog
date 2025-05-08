@@ -1,8 +1,10 @@
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\main.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\main.obj
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\clustering_functions.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\clustering_functions.obj
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connected_components.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\connected_components.obj
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\connectivity_functions.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\connectivity_functions.obj
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\degrees_distribution_functions.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\degrees_distribution_functions.obj
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\graph_analysis_functions.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\graph_analysis_functions.obj
+C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\pagerank.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\pagerank.obj
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\resistance_check_functions.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\resistance_check_functions.obj
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\shortest_paths_functions.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\shortest_paths_functions.obj
 C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\sources\stl_helper_functions.cpp;C:\Users\Filip\Documents\Klepanie\.NET\web-crawler\graph-analyzer\x64\Debug\stl_helper_functions.obj

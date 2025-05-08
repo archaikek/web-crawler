@@ -57,8 +57,34 @@ vect *find_articulation_points(const graph_t *graph)
 	clear_connectivity_vars();
 	return results;
 }
+
+static void remove_trivial_pairs(std::vector<std::pair<int, int>> *pairs, const vect *points)
+{
+	std::vector<std::pair<int, int>> *result = new std::vector<std::pair<int, int>>();
+	helper const int size = points->size(); if (size == 0) return;
+	helper const int *points_vals = &((*points)[0]);
+	for (int i = 0; i < pairs->size(); ++i)
+	{
+		helper const std::pair<int, int> pair = (*pairs)[i];
+		for (int j = 0; j < size; ++j)
+		{
+			if (pair.first == points_vals[j] || pair.second == points_vals[j])
+			{
+				goto breakskip;
+			}
+		}
+		result->emplace_back((*pairs)[i]);
+	breakskip:
+		continue;
+	}
+	pairs->clear();
+	pairs->insert(pairs->begin(), result->begin(), result->end());
+	delete result;
+}
 std::vector<std::pair<int, int>> *find_articulation_pairs(const graph_t *graph)
 {
+	vect *articulation_points = find_articulation_points(graph);
+
 	helper const int node_count = graph->node_count;
 	helper const vect *edges = graph->edges;
 	std::vector<std::pair<int, int>> *results = new std::vector<std::pair<int, int>>();
@@ -82,9 +108,11 @@ std::vector<std::pair<int, int>> *find_articulation_pairs(const graph_t *graph)
 		for (int j = 0; j < size; ++j) if (partial_points[j] < i) results->emplace_back(std::make_pair(partial_points[j], i));
 		delete_graph(new_graph);
 	}
+	remove_trivial_pairs(results, articulation_points);
 
 	delete partial_results;
 	delete curr_node;
 	clear_connectivity_vars();
+	delete articulation_points;
 	return results;
 }

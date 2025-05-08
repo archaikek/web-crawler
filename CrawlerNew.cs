@@ -131,7 +131,7 @@ namespace web_crawler
 			foreach (string _url in urls)
 			{
 				if (index >= limit) break;
-				if (remaining.Count >= maxQueueSize) continue; // too many nodes to process
+				if (remaining.Count >= 10 + (limit - index) / 4) continue; // too many nodes to process
 				string url = _url;
 				if (string.IsNullOrEmpty(url)) continue; // bad link
 
